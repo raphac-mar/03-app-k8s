@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.appName }}-{{ .Values.branch }}
+  labels:
+    app: {{ .Values.appName }}
+    argocd.argoproj.io/managed-by: openshift-gitops
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP
+      name: http
+  selector:
+    deployment: {{ .Values.appName }}

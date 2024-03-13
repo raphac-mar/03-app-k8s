@@ -1,0 +1,30 @@
+#
+appName: admin-dashboard
+branch: homolog
+
+# Deploy
+replicaCount: 1
+
+image:
+  imageRegistryNamespace: pipelines-image-registry
+  imageRegistryServer: image-registry.openshift-image-registry.svc:5000
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+
+#
+service:
+  type: ClusterIP
+  port: 3000
+  targetPort: 3000
+  domain: apps.salmao.azureredhat.lab.seprol.com.br
+
+#
+git:
+  repoUrl: https://github.com/raphac-mar/admin-dashboard
+
+#
+pipeline:
+  namespace: pipelines
+  name: pipeline-nextjs
+  pvc: shared-workspace-pvc

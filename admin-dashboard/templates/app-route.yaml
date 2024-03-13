@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: {{ .Values.appName }}
+    argocd.argoproj.io/managed-by: openshift-gitops
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.appName }}-{{ .Values.branch }}
+spec:
+  host: {{ .Values.appName }}-{{ .Values.branch }}.{{ .Values.service.domain }}
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: {{ .Values.appName }}
+    weight: 100

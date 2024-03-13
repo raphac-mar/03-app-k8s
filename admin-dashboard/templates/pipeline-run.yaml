@@ -1,0 +1,27 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  name: {{ .Values.appName }}-{{ .Values.branch }}
+  namespace: {{ .Values.pipeline.namespace }}
+spec:
+  pipelineRef:
+    name: {{ .Values.pipeline.name }}
+  workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: {{ .Values.pipeline.pvc }}
+  params:
+    - name: pipelineStart
+      value: pipeline-run
+    #
+    - name: appName
+      value: {{ .Values.appName }}
+    - name: appNamespace
+      value: {{ .Values.appName }}-{{ .Values.branch }}
+    - name: imageRegistryNamespace
+      value: {{ .Values.image.imageRegistryNamespace }}
+    #
+    - name: repoUrl
+      value: {{ .Values.git.repoUrl }}
+    - name: branchName
+      value: {{ .Values.branch }}
