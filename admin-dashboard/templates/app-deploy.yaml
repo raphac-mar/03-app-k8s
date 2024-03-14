@@ -1,10 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    argocd-image-updater.argoproj.io/image-alias.force-update: 'true'
-    argocd-image-updater.argoproj.io/image-alias.update-strategy: latest
-    argocd-image-updater.argoproj.io/image-list: '{{ .Values.image.imageRegistryServer }}/{{ .Values.image.imageRegistryNamespace }}/{{ .Values.appName }}'
   name: {{ .Values.appName }}
   namespace: {{ .Values.appName }}-{{ .Values.branch }}
   labels:
