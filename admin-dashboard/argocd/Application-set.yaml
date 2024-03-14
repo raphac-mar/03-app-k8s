@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: admin-dashboard
+  namespace: openshift-gitops
+spec:
+  generators:
+  - list:
+      elements:
+      - branch: dev
+      - branch: homolog
+      - branch: prod
+  template:
+    metadata:
+      name: 'app-admin-dashboard-{{branch}}'
+    spec:
+      project: default
+      source:
+        repoURL: "https://github.com/raphac-mar/03-app-k8s"
+        targetRevision: HEAD
+        path: admin-dashboard
+        helm:
+          values: 'branch: {{branch}}'
+      destination:
+        server: "https://kubernetes.default.svc"
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true

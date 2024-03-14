@@ -1,27 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: 03-app-k8s
+  name: {{ .Values.appName }}-{{ .Values.branch }}
   namespace: openshift-gitops
-  annotations:
-    argocd-image-updater.argoproj.io/image-alias.force-update: "true"
-    argocd-image-updater.argoproj.io/image-alias.update-strategy: latest
-    argocd-image-updater.argoproj.io/image-list: admin-dashboard
 spec:
   destination:
     server: "https://kubernetes.default.svc"
   project: default
-  source:
-    - path: admin-dashboard
+  sources:
+    - path: {{ .Values.appName }}
       repoURL: "https://github.com/raphac-mar/03-app-k8s"
       targetRevision: HEAD
       helm:
-        values: "branch: dev"
-    - path: admin-dashboard
-      repoURL: "https://github.com/raphac-mar/03-app-k8s"
-      targetRevision: HEAD
-      helm:
-        values: "branch: homolog"
+        values: "branch: {{ .Values.branch }}"
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
