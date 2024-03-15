@@ -1,4 +1,4 @@
-apiVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
   name: {{ .Values.appName }}-{{ .Values.branch }}
@@ -6,7 +6,8 @@ metadata:
 spec:
   pipelineRef:
     name: {{ .Values.pipeline.name }}
-  serviceAccountName: build-bot
+  taskRunTemplate:
+    serviceAccountName: build-bot
   workspaces:
     - name: shared-workspace
       persistentVolumeClaim:
