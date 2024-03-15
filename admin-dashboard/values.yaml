@@ -10,7 +10,7 @@ image:
   imageRegistryServer: image-registry.openshift-image-registry.svc:5000
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: fa55b4a6a48239d79f681fbeda9a79877e8c842c
+  tag: 3a69ec24a978b4d36286b17bca3241b3f889b794
 
 #
 service:
