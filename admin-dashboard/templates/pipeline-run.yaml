@@ -6,13 +6,14 @@ metadata:
 spec:
   pipelineRef:
     name: {{ .Values.pipeline.name }}
+  #
   workspaces:
     - name: shared-workspace
       persistentVolumeClaim:
         claimName: {{ .Values.pipeline.pvc }}
-    - name: git-credentials
+    - name: github-credentials-secret
       secret:
-        secretName: git-credentials
+        secretName: github-credentials-secret
   params:
     - name: pipelineStart
       value: pipeline-run
