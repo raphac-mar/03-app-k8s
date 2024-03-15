@@ -6,8 +6,6 @@ metadata:
 spec:
   pipelineRef:
     name: {{ .Values.pipeline.name }}
-  taskRunTemplate:
-    serviceAccountName: build-bot
   workspaces:
     - name: shared-workspace
       persistentVolumeClaim:
