@@ -10,6 +10,9 @@ spec:
     - name: shared-workspace
       persistentVolumeClaim:
         claimName: {{ .Values.pipeline.pvc }}
+    - name: ssh-creds
+      secret:
+        secretName: github-ssh-key
   params:
     - name: pipelineStart
       value: pipeline-run
