@@ -10,9 +10,9 @@ spec:
     - name: shared-workspace
       persistentVolumeClaim:
         claimName: {{ .Values.pipeline.pvc }}
-    - name: basic-auth
+    - name: git-credentials
       secret:
-        secretName: git-03-app-k-8-s-token-6bpvk
+        secretName: git-credentials
   params:
     - name: pipelineStart
       value: pipeline-run
