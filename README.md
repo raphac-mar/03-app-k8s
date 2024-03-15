@@ -1,4 +1,4 @@
-# Recursos de infra para o App
+# Recursos de infra para o App do framework Nextjs
 
 - Git: `https://github.com/raphac-mar/03-app-k8s`
 
@@ -27,6 +27,8 @@ resourceExclusions: |
 ```sh
 cd 03-app-k8s/admin-dashboard
 oc apply -f argocd/application.yaml
+
+oc delete ApplicationSet admin-dashboard -n openshift-gitops
 ```
 
 https://developers.redhat.com/articles/2023/02/20/multiple-sources-argo-cd-applications#examples_of_multiple_sources_applications
