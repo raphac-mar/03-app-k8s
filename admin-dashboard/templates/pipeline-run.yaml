@@ -11,9 +11,9 @@ spec:
     - name: shared-workspace
       persistentVolumeClaim:
         claimName: {{ .Values.pipeline.pvc }}
-    - name: github-credentials-secret
+    - name: git-credentials
       secret:
-        secretName: github-credentials-secret
+        secretName: git-credentials
   params:
     - name: pipelineStart
       value: pipeline-run
